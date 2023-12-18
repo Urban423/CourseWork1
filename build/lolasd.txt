@@ -1,0 +1,6 @@
+index     channel     channel number     program          genre       showman          remplacement     start time           end time             description     
+0         CTC         0                  Undertale        fantasy     toby fox         -                11:12 12.11.2023     12:13 12.12.2023     story about freindship/murderer
+1         CBS         1                  News             news        batman           robin            07:32 12.11.2023     12:13 11.12.2023     -
+2         Fox         2                  The Simpsons     comedy      Matt Groeing     -                07:32 12.11.2023     12:13 11.12.2023     -
+3         Fox         2                  Family guy       comedy      -                -                11:32 12.11.2023     22:13 11.12.2023     -
+4         LEO         3                  1+1              comedy      -                -                12:20 07.12.2023     14:00 07.12.2023     story about freindship

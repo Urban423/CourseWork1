@@ -1,0 +1,5 @@
+"CTC" "11:12 12.11.2023" "12:13 12.12.2023" "Undertale"         "fantasy"     "toby fox" "-"  "story about freindship/murderer"
+"CBS" "7:32 12.11.2023"  "12:13 11.12.2023" "News" 		"news"	      "batman" "robin"  
+"Fox" "7:32 12.11.2023"  "12:13 11.12.2023" "The Simpsons" 	"comedy"      "Matt Groeing" "-"
+"Fox" "11:32 12.11.2023"  "22:13 11.12.2023" "Family guy" 	"comedy"      "-" "-"
+"LEO" "12:20 07.12.2023"  "14:00 07.12.2023" "1+1" 		"comedy"      "-" "-" "story about freindship"

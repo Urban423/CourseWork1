@@ -1,0 +1,226 @@
+#include "List.h"
+#include <stdio.h>
+
+
+template<class T>
+listElement<T>::listElement(T* element)
+{ 
+	next = nullptr;
+	this->element = element; 
+}
+
+template<class T>
+listElement<T>::~listElement()
+{
+	
+}
+
+template<class T>
+T* listElement<T>::get()
+{
+	return element;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+template<class T>
+list<T>::list()
+{
+	_size = 0;
+	head = nullptr;
+	pointer = nullptr;
+}
+
+template<class T>
+list<T>::~list()
+{
+	
+}
+
+template<class T>
+T* list<T>::add(const T& element)
+{
+	listElement<T>* new_element = new listElement<T>(new T(element));
+	if(_size == 0)
+	{
+		_size = 1;
+		head = new_element;
+		pointer = head;
+		return new_element->element;
+	}
+	
+	listElement<T>* ptr = head;
+	while(ptr->next != nullptr)
+	{
+		if(*ptr->element == element)
+		{
+			delete new_element;
+			return ptr->element;
+		}
+		ptr = ptr->next;
+	}
+	if(*ptr->element == element)
+	{
+		delete new_element;
+		return ptr->element;
+	}
+	_size++;
+	ptr->next = new_element;
+	return new_element->element;
+}
+
+template<class T>
+T* list<T>::get()
+{
+	if(pointer == nullptr)
+	{
+		return nullptr;
+	}
+	return pointer->element;
+}
+
+template<class T>
+uint list<T>::size()
+{
+	return _size;
+}
+
+template<class T>
+void list<T>::begin()
+{
+	pointer = head;
+}
+
+template<class T>
+void list<T>::pop(uint index)
+{
+	if(_size <= index)
+	{
+		return;
+	}
+	listElement<T>* temp;
+	listElement<T>* ptr = head;
+	if(index == 0)
+	{
+		ptr = head->next;
+		delete head;
+		head = ptr;
+		_size--;
+		return;
+	}
+	
+	index--;
+	uint i = 0;
+	while(i < index)
+	{
+		i++;
+		ptr = ptr->next;
+	}
+	
+	temp = ptr->next->next;
+	delete ptr->next;
+	ptr->next = temp;
+	_size--;
+}
+
+
+template<class T>
+listElement<T>* list<T>::listmerge(listElement<T>* a, listElement<T>* b, bool (*comarator)(T&, T&))
+{
+	if(a == nullptr)
+	{
+		return b;
+	}
+	if(b == nullptr)
+	{
+		return a;
+	}
+	
+	listElement<T>* ptr = nullptr;
+	if(comarator(*(a->element), *(b->element)))
+	{
+		ptr = a;
+		ptr->next = listmerge(a->next, b, comarator);
+	}
+	else
+	{
+		ptr = b;
+		ptr->next = listmerge(a, b->next, comarator);
+	}
+	return ptr;
+}
+
+template<class T>
+void list<T>::merge(listElement<T>** head, bool (*comarator)(T&, T&))
+{
+	if((*head) == nullptr || (*head)->next == nullptr)
+	{
+		return;
+	}
+	
+	listElement<T>* a = *head;
+	listElement<T>* ptr = a->next;
+	listElement<T>* b = a;
+	
+	while(ptr != nullptr)
+	{
+		ptr = ptr->next;
+		if(ptr != nullptr)
+		{
+			b = b->next;
+			ptr = ptr->next;
+		}
+	}
+	ptr = b;
+	b = b->next;
+	ptr->next = nullptr;
+	
+	
+	merge(&a, comarator);
+	merge(&b, comarator);
+	
+	*head = listmerge(a, b, comarator);
+	
+}
+
+template<class T>
+void list<T>::sort(bool (*comarator)(T&, T&))
+{
+	if(_size < 2)
+	{
+		return;
+	}
+	merge(&head, comarator);
+}
+
+
+
+template<class T>
+list<T> list<T>::operator++(int)
+{
+	list<T> list = *this;
+	if(this->_size < 2)
+	{
+		this->pointer = this->head;
+		return list;
+	}
+	
+	if(this->pointer->next != nullptr)
+	{
+		this->pointer = this->pointer->next;
+	}
+	return list;
+}
